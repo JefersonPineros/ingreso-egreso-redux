@@ -19,6 +19,8 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
+    "@ngrx/store": "^17.1.1",
+    "@ngrx/store-devtools": "^17.1.1",
     "bootstrap": "^5.3.3",
     "firebase": "^10.8.1",
     "ngx-spinner": "^16.0.2",
