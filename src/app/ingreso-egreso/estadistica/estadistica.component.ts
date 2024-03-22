@@ -5,7 +5,8 @@ import { IngresosEgresos } from '../../model/ingresos/ingresos-egresos';
 
 import { ChartData, ChartEvent, ChartType, Chart } from 'chart.js';
 import * as Chartjs from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
+import { AppStateWithIngreso } from '../ingreso-egreso.reducer';
+
 //import { ChartHostComponent } from '../chart-host/chart-host.component';
 
 const controllers: any = Object.values(Chartjs).filter(
@@ -34,12 +35,15 @@ export class EstadisticaComponent implements OnInit, OnDestroy {
 
   public doughnutChartType: ChartType = 'doughnut';
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppStateWithIngreso>) {}
 
   ngOnInit(): void {
     this.store.select('ingresosEgresos').subscribe({
       next: ({ items }) => {
         this.generarEstadistica(items);
+      },
+      error: (err) => {
+        console.log(err);
       },
     });
   }
