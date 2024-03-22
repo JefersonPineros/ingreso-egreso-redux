@@ -22,7 +22,9 @@
     "@ngrx/store": "^17.1.1",
     "@ngrx/store-devtools": "^17.1.1",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.2",
     "firebase": "^10.8.1",
+    "ng2-charts": "^6.0.0",
     "ngx-spinner": "^16.0.2",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.10.6",
@@ -41,5 +43,10 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.2.2"
+  },
+  "overrides": {
+    "ng2-charts": {
+      "@angular/platform-browser": "^17.0.0"
+    }
   }
 }

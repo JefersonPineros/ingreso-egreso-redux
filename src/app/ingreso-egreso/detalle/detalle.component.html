@@ -15,12 +15,25 @@
           </thead>
 
           <tbody>
+            @for (item of ingresosEgresos | ordenIngreso; track $index) {
+
             <tr>
-              <td>Descripción</td>
-              <td>Monto</td>
-              <td>Tipo</td>
-              <td>acciones</td>
+              <td>{{ item.descripcion }}</td>
+              <td>{{ item.monto | currency }}</td>
+              <td
+                [ngClass]="
+                  item.tipo === 'ingreso' ? 'text-success' : 'text-danger'
+                "
+              >
+                {{ item.tipo }}
+              </td>
+              <td>
+                <button (click)="borrarItem(item.uid)" class="btn btn-danger">
+                  <i class="fa fa-trash"></i> Borrar
+                </button>
+              </td>
             </tr>
+            }
           </tbody>
         </table>
       </div>

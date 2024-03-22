@@ -27,6 +27,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { OrdenIngresoPipe } from './pipes/orden-ingreso.pipe';
+
+import { BaseChartDirective } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
+    OrdenIngresoPipe,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       connectInZone: true, // If set to true, the connection is established within the Angular zone
     }),
+    BaseChartDirective,
   ],
   providers: [],
   bootstrap: [AppComponent],

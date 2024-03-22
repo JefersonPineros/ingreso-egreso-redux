@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CreateUserInt } from '../model/users/createUser';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../model/users/usuarioModel';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Store } from '@ngrx/store';
 import * as authActions from '../auth/auth.actions';
+import * as ingresoEgreso from '../ingreso-egreso/ingreso-egreso.actions';
 import { AppState } from '../app.reducer';
 
 @Injectable({
@@ -14,6 +15,11 @@ import { AppState } from '../app.reducer';
 })
 export class AuthService {
   private userUnSubscribe: Subscription | undefined;
+  private _user: Usuario | undefined;
+
+  get user() {
+    return { ...this._user };
+  }
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -31,18 +37,23 @@ export class AuthService {
             .subscribe({
               next: (fireStoreUser) => {
                 const user = Usuario.fromFireStore(fireStoreUser);
+                this._user = user;
                 this.store.dispatch(authActions.setUser({ user: user }));
               },
               error: (err) => {
                 this.store.dispatch(authActions.unSetUser());
+                this.store.dispatch(ingresoEgreso.unSetItems());
               },
             });
         } else {
           this.store.dispatch(authActions.unSetUser());
+          this.store.dispatch(ingresoEgreso.unSetItems());
           this.userUnSubscribe?.unsubscribe();
+          this._user = undefined;
         }
       },
       error: (error) => {
+        this._user = undefined;
         this.userUnSubscribe?.unsubscribe();
         console.log(error);
       },
